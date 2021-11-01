@@ -36,12 +36,12 @@ WORKDIR /root/rt-thread
 
 RUN python -c "import tools.menuconfig; tools.menuconfig.touch_env()"
 
-RUN source ~/.env/env.sh
-
 RUN apt-get clean
 
 RUN rm -rf /var/lib/apt/lists/*
 
+#RUN /bin/bash -c "source ~/.env/env.sh"
+#RUN ["/bin/bash", "-c", "source ~/.env/env.sh"]
 ENV RTT_CC=gcc
 
 
