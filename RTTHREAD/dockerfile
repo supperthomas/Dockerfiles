@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
 MAINTAINER supperthomas <78900636@qq.com>
+
 ARG DEST_DIR=/root
 
 WORKDIR ${DEST_DIR}
@@ -8,7 +9,12 @@ RUN apt-get update
 
 RUN apt-get upgrade -y
 
+RUN apt-get install -y apt-utils
+
 RUN apt-get install -y git
+
+#not work
+#RUN apt-get install -y qemu
 
 RUN apt-get install -y python3 python-is-python3 
 
@@ -24,7 +30,7 @@ RUN pip install requests -qq
 
 RUN apt-get install -y wget
 
-RUN wget -qO- https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 | tar -xj 
+RUN wget -qO- https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 | tar -xj 
 
 ENV PATH "/root/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
 
@@ -40,6 +46,7 @@ RUN apt-get clean
 
 RUN rm -rf /var/lib/apt/lists/*
 
+#not work 
 #RUN /bin/bash -c "source ~/.env/env.sh"
 #RUN ["/bin/bash", "-c", "source ~/.env/env.sh"]
 ENV RTT_CC=gcc
