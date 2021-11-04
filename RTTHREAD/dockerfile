@@ -30,7 +30,7 @@ ENV PATH "/root/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
 
 ENV RTT_EXEC_PATH=/root/gcc-arm-none-eabi-10.3-2021.10/bin
 
-RUN git clone https://github.com/supperthomas/rt-thread.git
+RUN git clone https://github.com/RT-Thread/rt-thread.git
 
 WORKDIR /root/rt-thread
 
