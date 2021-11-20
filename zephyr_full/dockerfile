@@ -36,9 +36,9 @@ RUN /bin/bash -c 'west update;exit 0'
 
 RUN /bin/bash -c 'west zephyr-export'
 
-RUN pip3 install --user -r ~/zephyrproject/zephyr/scripts/requirements.txt
+RUN pip3 install --user -r /root/zephyrproject/zephyr/scripts/requirements.txt
 
-RUN cd ~
+WORKDIR /root/
 
 RUN wget -O- https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.13.1/zephyr-sdk-0.13.1-linux-x86_64-setup.run
 
