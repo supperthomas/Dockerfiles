@@ -1,0 +1,48 @@
+FROM ubuntu:20.04
+MAINTAINER supperthomas <78900636@qq.com>
+ARG DEST_DIR=/root
+
+WORKDIR ${DEST_DIR}
+
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y git python3 python-is-python3 pip vim wget
+
+RUN wget -O- https://apt.kitware.com/kitware-archive.sh
+
+RUN chmod a+wrx kitware-archive.sh
+
+RUN apt-get -y install dialog whiptail
+
+RUN ./kitware-archive.sh
+RUN apt install --no-install-recommends cmake ninja-build gperf \
+  ccache dfu-util device-tree-compiler wget \
+  python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
+  make gcc gcc-multilib g++-multilib libsdl2-dev
+
+RUN pip3 install --user -U west
+
+RUN echo 'export PATH=~/.local/bin:"$PATH"' >> ~/.bashrc
+
+RUN source ~/.bashrc
+
+RUN west init ~/zephyrproject
+
+RUN cd ~/zephyrproject
+
+RUN west update
+
+RUN west zephyr-export
+
+RUN pip3 install --user -r ~/zephyrproject/zephyr/scripts/requirements.txt
+
+RUN cd ~
+
+RUN wget -O- https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.13.1/zephyr-sdk-0.13.1-linux-x86_64-setup.run
+
+RUN chmod +x zephyr-sdk-0.13.1-linux-x86_64-setup.run
+
+RUN ./zephyr-sdk-0.13.1-linux-x86_64-setup.run -- -d ~/zephyr-sdk-0.13.1
+
+RUN cd ~/zephyrproject/zephyr
+
+RUN west build -b nrf52840dk_nrf52840 samples/hello_world
