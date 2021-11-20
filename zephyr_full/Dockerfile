@@ -7,14 +7,15 @@ WORKDIR ${DEST_DIR}
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y git python3 python-is-python3 pip vim wget
 
-RUN wget -O- https://apt.kitware.com/kitware-archive.sh
+RUN wget https://apt.kitware.com/kitware-archive.sh
 
 RUN chmod a+wrx kitware-archive.sh
 
 RUN apt-get -y install dialog whiptail
 
 RUN ./kitware-archive.sh
-RUN apt install --no-install-recommends cmake ninja-build gperf \
+
+RUN apt install -y -qq --no-install-recommends cmake ninja-build gperf \
   ccache dfu-util device-tree-compiler wget \
   python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
   make gcc gcc-multilib g++-multilib libsdl2-dev
