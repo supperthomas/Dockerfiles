@@ -15,22 +15,24 @@ RUN apt-get -y install dialog whiptail
 
 RUN ./kitware-archive.sh
 
-RUN apt install -y -qq --no-install-recommends cmake ninja-build gperf \
-  ccache dfu-util device-tree-compiler wget \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends cmake ninja-build gperf ccache dfu-util device-tree-compiler wget \
   python3-dev python3-pip python3-setuptools python3-tk python3-wheel xz-utils file \
   make gcc gcc-multilib g++-multilib libsdl2-dev
 
 RUN pip3 install --user -U west
 
-RUN echo 'export PATH=~/.local/bin:"$PATH"' >> ~/.bashrc
+ENV PATH="~/.local/bin:$PATH"
 
-RUN source ~/.bashrc
+RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
 
-RUN west init ~/zephyrproject
+RUN echo $PATH
+
+
+RUN /bin/bash -c 'west init ~/zephyrproject'
 
 RUN cd ~/zephyrproject
 
-RUN west update
+RUN /bin/bash west update
 
 RUN west zephyr-export
 
