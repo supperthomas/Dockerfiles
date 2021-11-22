@@ -18,6 +18,25 @@ RUN apt-get install -y vim
 
 RUN apt-get install -y git
 
+#env
+RUN mkdir /root/.env
+
+RUN mkdir /root/.env/tools
+
+RUN mkdir /root/.env/packages
+
+RUN mkdir /root/.env/packages/packages
+
+RUN mkdir /root/.env/tools/scripts
+
+#RUN git clone https://github.com/RT-Thread/env.git /root/.env/tools/scripts/
+RUN git clone https://hub.fastgit.org/RT-Thread/env.git /root/.env/tools/scripts/
+
+#RUN git clone https://github.com/RT-Thread/packages.git /root/.env/packages/packages/
+RUN git clone https://hub.fastgit.org/RT-Thread/packages.git /root/.env/packages/packages/
+
+ENV PATH="/root/.env/tools/scripts:$PATH"
+
 RUN apt-get install -y wget
 
 RUN apt-get install -y python3 python-is-python3 
@@ -34,18 +53,16 @@ RUN pip install requests -qq
 
 ENV RTT_EXEC_PATH=/usr/bin
 
-#RUN git clone https://gitee.com/superThomas/rt-thread_github.git
-
-WORKDIR /root/rt-thread
-
-#RUN python -c "import tools.menuconfig; tools.menuconfig.touch_env()"
-
 RUN apt-get clean
 
 RUN rm -rf /var/lib/apt/lists/*
-#not work
-#RUN /bin/bash -c "source ~/.env/env.sh"
-#RUN ["/bin/bash", "-c", "source ~/.env/env.sh"]
+
 ENV RTT_CC=gcc
+
+WORKDIR /root
+
+#RUN git clone https://hub.fastgit.org/RT-Thread/rt-thread.git
+
+WORKDIR /root/rt-thread
 
 
