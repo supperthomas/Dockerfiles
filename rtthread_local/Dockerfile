@@ -61,7 +61,7 @@ ENV RTT_CC=gcc
 
 WORKDIR /root
 
-#RUN git clone https://github.com/RT-Thread/rt-thread.git
-#RUN git clone https://hub.fastgit.org/RT-Thread/rt-thread.git
+#RUN git clone https://github.com/RT-Thread/rt-thread.git --depth=1
+#RUN git clone https://hub.fastgit.org/RT-Thread/rt-thread.git --depth=1
 
 
