@@ -6,9 +6,6 @@ ARG DEST_DIR=/root
 
 WORKDIR ${DEST_DIR}
 
-#china change sourcelist
-RUN sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.aliyun.com\/ubuntu\//g' /etc/apt/sources.list && apt-get update
-
 #system
 RUN apt-get update
 
@@ -29,11 +26,9 @@ RUN mkdir /root/.env/packages/packages
 
 RUN mkdir /root/.env/tools/scripts
 
-#RUN git clone https://github.com/RT-Thread/env.git /root/.env/tools/scripts/
-RUN git clone https://hub.fastgit.org/RT-Thread/env.git /root/.env/tools/scripts/
+RUN git clone https://github.com/RT-Thread/env.git /root/.env/tools/scripts/
 
-#RUN git clone https://github.com/RT-Thread/packages.git /root/.env/packages/packages/
-RUN git clone https://hub.fastgit.org/RT-Thread/packages.git /root/.env/packages/packages/
+RUN git clone https://github.com/RT-Thread/packages.git /root/.env/packages/packages/
 
 ENV PATH="/root/.env/tools/scripts:$PATH"
 
@@ -61,7 +56,7 @@ ENV RTT_CC=gcc
 
 WORKDIR /root
 
-#RUN git clone https://github.com/RT-Thread/rt-thread.git
+RUN git clone https://github.com/RT-Thread/rt-thread.git
 #RUN git clone https://hub.fastgit.org/RT-Thread/rt-thread.git
 
 
