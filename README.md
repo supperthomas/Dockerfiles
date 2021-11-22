@@ -34,6 +34,6 @@
 
 - https://katacoda.com/    这个空间比较大，缺点就是有可能随时断线
 
-- https://labs.play-with-docker.com/    这个空间只有4G，适合小型化的docker， 可以用putty
+- https://labs.play-with-docker.com/    这个空间只有4G，适合小型化的docker， 可以用putty  使用时间4个小时
 
   
